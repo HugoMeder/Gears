@@ -1,0 +1,307 @@
+% ----------------------------------------------------------------
+% AMS-LaTeX Paper ************************************************
+% **** -----------------------------------------------------------
+% documentclass[fleqn]{report}
+\documentclass[a4paper,fleqn]{article}
+% \documentclass[a4paper,fleqn]{scrreprt}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+\setlength{\textwidth}{15.0cm}
+\setlength{\paperwidth}{210mm}
+\setlength{\paperheight}{297mm}
+%\usepackage{german}
+\usepackage{graphicx} 
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{alltt}
+%\usepackage{hyperref}
+
+\newcounter{thm}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Hilfssatz}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{\vspace{1ex}\noindent{\bf Proof}\hspace{0.5em}}
+%	{\hfill\qed\vspace{1ex}}
+ 
+
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+\newcommand{\qt}{\texttt}
+
+\newcommand{\bibdef}[4]{\bibitem{#1} {\bf #2:} {\it #3}\\#4}
+
+\newcommand{\eeeccc}{\end{section}}
+\newcommand{\atanh}{\mathrm{atan}}
+
+\numberwithin{equation}{section}
+
+\newcommand{\beginchap}[1]{\begin{section}{#1}
+%\setcounter{equation}{1}
+}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+
+\title{Gears based on general smooth and sinusodial rack profile}
+\author{Hugo Meder}
+% \thanks{Developer, IC-IDO, Stuttgart}
+\begin{document}
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+\tableofcontents
+
+\newpage
+\begin{abstract}
+The general geometrical and mechanical properties of gears based on general smooth rack profiles are discussed.
+\end{abstract}
+\newpage
+
+\beginchap{Geometry}
+\begin{subsection}{Motion of gear and rack}
+We are considering a gear rotating with angular velocity $\omega$ around the coordinate origin $(0,0)$ in the two-dimensional (complex) plane. On the other hand we are considering a rack moving along the $x$-axis (real axis) with velocity $v$.
+Thus we have two two-dimensional moving rigid objects. We consider body-space coordinates $z_g$ and $z_r$ for the gear and the rack respectively. The time-dependent transform to world coordinates $z$ are as follows:
+\begin{eqnarray}
+	\Phi_g(z_g,t) &=& z_ge^{i\omega t}\\
+	\Phi_r(z_r,t) &=& z_r+vt
+\end{eqnarray}
+Of course we have the inverse functions (inverse with respect to coordinates $z$):
+\begin{eqnarray}
+	\Phi^{-1}_g(z,t) &=& ze^{-i\omega t}\\
+	\Phi^{-1}_r(z,t) &=& z-vt
+\end{eqnarray}
+Thus, we get the mapping from one body space into the other as a function of time as follows:
+\begin{eqnarray}
+	\Xi_g(z_r,t) &=& \Phi^{-1}_g(\Phi_r(z_r,t),t) = (z_r+vt)e^{-i\omega t}\\
+	\Xi_r(z_g,t) &=& \Phi^{-1}_r(\Phi_g(z_g,t),t) = z_ge^{i\omega t}-vt
+\end{eqnarray}
+with these time derivatives (velocity fields):
+\begin{eqnarray}
+	\dot{\Xi}_g(z_r,t) &=& (v-i(z_r+vt)\omega)e^{-i\omega t}\\
+	\dot{\Xi}_r(z_g,t) &=& i\omega z_ge^{i\omega t}-v
+\end{eqnarray}
+For any $t$, there is exactly one $z_r$ respectively $z_g$, such that the respective velocity field vanishes.
+We denote these with $z_{r0}(t)$ $z_{g0}(t)$:
+\begin{eqnarray}
+z_{r0}(t) &=& -i\frac{v}{\omega}-vt\\
+z_{g0}(t) &=& -i\frac{v}{\omega}e^{-i\omega t}
+\end{eqnarray}
+The respective world space point does no longer depend on time $t$:
+\begin{eqnarray}
+z_0 &=& \Phi_r(z_{r0}(t),t) = \Phi_g(z_{g0}(t),t) = -i\frac{v}{\omega}
+\end{eqnarray}
+We denote the quantity $\frac{v}{\omega}$ with $r$ (pitch radius), obtaining the typical relation
+\begin{eqnarray}
+	v &=& \omega r
+\end{eqnarray}
+\end{subsection}
+
+\begin{subsection}{Shape of the rack and gear module}
+In body coordinates $z_r$, the surface of the rack is given by a (smooth and derivable) real function $f(x)$ such that
+\begin{eqnarray}
+	z_r(x) &=& x+i(f(x)-r)
+\end{eqnarray}
+We further assume that $f(x)$ is periodic with periodicity $p$:
+\begin{eqnarray}
+f(x+p) = f(x)
+\end{eqnarray}
+We consider all points $z=x+iy$ ($x$, $y$ real) with $y< f(x)-r$ to be actual rack points (means, that these points really belong to the rack in the sense of a rigid body). We denote this set by
+\begin{eqnarray}
+\Omega_r &=& \{x+yi|y< f(x)-r\}
+\end{eqnarray}
+After mapping this to the gear body space for a given time $t$ gives
+\begin{eqnarray}
+\Omega_g(t) &=& \Xi_g(\Omega_r,t) = \{(x+yi+vt)e^{-i\omega t}|y < f(x)-r\}
+\end{eqnarray}
+After a full rotation of the gear at $\tau=\frac{2\pi}{\omega}$, we assume that 
+\begin{eqnarray}
+	\Omega_g(0) &=& \Omega_g(\tau) = \{(x+yi+\frac{2\pi v}{\omega})|y< f(x)-r\}= \{(x+yi+2\pi r)|y< f(x)-r\}
+\end{eqnarray}
+We introduce a magnitude
+\begin{eqnarray}
+\mathbf{z} &=& \frac{2\pi r}{p}
+\end{eqnarray}
+If $\mathbf{z}$ is an integer number (the number of teeth of the gear), then we get indeed
+\begin{eqnarray}
+\Omega_g(\tau) &=& \{(x+yi+\mathbf{z}p)|y< f(x)-r\} = \{(x+yi+\mathbf{z}p)|y< f(x+\mathbf{z}p)-r\} = \{(x+yi)|y< f(x)-r\}\cr
+&=& \Omega(0)
+\end{eqnarray}
+In order to get rational numbers in the context of construction, the module number $m$ is introduced to express the linear relation between the number of teeth and the diameter of the gear 
+\begin{eqnarray}
+	2r &=& \mathbf{z}m
+\end{eqnarray}
+\end{subsection}
+\begin{subsection}{The shape of the gear}
+We define the swapped area of the rack in gear-body-coordinates:
+\begin{eqnarray}
+	\tilde{\Omega}_g &=& \bigcup_t \Omega_g(t)
+\end{eqnarray}
+Then the set
+\begin{eqnarray}
+	\bar{\Delta} &=& \mathbb{C}\backslash \tilde{\Omega}_g
+\end{eqnarray}
+is the largest set of gear body points that never coincide with the rack. Notice, from a topological point of view, the sets $\Omega_g(t)$ are open sets as well as $\tilde{\Omega}_g$. Thus $\bar{\Delta}$ is a closed set.
+We define $\Delta$ to be the interior of $\bar{\Delta}$:
+\begin{eqnarray}
+	\Delta &=& \mathtt{int} (\bar{\Delta})
+\end{eqnarray}
+and $\Gamma$ to be the border of $\bar{\Delta}$
+\begin{eqnarray}
+	\Gamma &=& \partial \bar{\Delta}
+\end{eqnarray}
+We now prove
+\begin{theorem}
+\label{th_1}
+For any $z_g\in \Gamma$ there exists a $t$ and an $x$ such that
+\begin{eqnarray}
+\label{prop_1}	z_g &=& (x+(f(x)-r)i+vt)e^{-i\omega t}
+\end{eqnarray}
+\end{theorem}
+\begin{proof}
+\ref{prop_1} is equivalent to
+\begin{eqnarray}
+\mathtt{Re}(z_ge^{i\omega t}) &=& x+vt\cr
+\mathtt{Im}(z_ge^{i\omega t}) &=& f(x)-r
+\end{eqnarray}
+Assuming that for a given $z_g$, $t$, and $x$ we have
+\begin{eqnarray}
+\mathtt{Re}(z_ge^{i\omega t}) &=& x+vt\cr
+\mathtt{Im}(z_ge^{i\omega t}) &<& f(x)-r
+\end{eqnarray}
+Then we must have $z_g\in \Omega_g(t)$. And therefore $z_g \in \tilde{\Omega}$ and $g_z\notin \bar{\Delta}$ and finally $z_g \notin \Gamma$ which contradicts the proposition.
+Thus for all $t$ we must have
+\begin{eqnarray}
+\mathtt{Im}(z_ge^{i\omega t}) &\ge& f(\mathtt{Re}(z_ge^{i\omega t})-vt)-r
+\end{eqnarray}
+We now define the function
+\begin{eqnarray}
+g(z,t) &=& \mathtt{Im}(z e^{i\omega t}) - f(\mathtt{Re}(ze^{i\omega t})-vt)+r
+\end{eqnarray}
+which is now known to satisfy
+\begin{eqnarray}
+g(z_g,t) &\ge & 0
+\end{eqnarray}
+for all $t$. Assuming that $g(z_g,t) > 0$ for all t leads to another contradiction.
+Whenever $g(z_g,t) > 0$ for a t, then there is a maximum radius $\rho(t)$ such that $g(z,t)$ is non-negative for all $z$ in the open disc $u_{\rho(t)}(z_g)$.
+$\rho(t)$ is a continuous function of $t$. Since $g(z,t)$ is periodic with respect to $t$ we can take the minimum radius $\rho_{min}$ over a compact set. This means that $u_{\rho_{min}}(z_g)\subset \bar{\Delta}$
+and thus $z_b\in \Delta$ and finally $z_b\notin \Gamma$.
+\qed
+\end{proof}
+\begin{subsubsection}{Another necessary condition for $z_b\in \Gamma$}
+For any $z_g\in \Gamma$, from theorem \ref{th_1} we know about the existence of a $t$ and an $x$ such that
+\begin{eqnarray}
+z_g &=& (x+(f(x)-r)i+vt)e^{-i\omega t}
+\end{eqnarray}
+This corresponds to a point in rack coordinates
+\begin{eqnarray}
+z_r&=&\Xi_r(z_g,t)=z_ge^{i\omega t}-vt=x+(f(x)-r)i
+\end{eqnarray}
+On the other hand the velocity of the gear at that point in rack coordinates is
+\begin{eqnarray}
+\label{contact_vel}
+	\dot{\Xi}_r(z_g,t) &=& i\omega z_ge^{i\omega t}-v= i\omega (x+(f(x)-r)i+vt)-v\cr
+	&=& -\omega(f(x)-r)-v+i\omega(x+vt)\cr
+	&=& -\omega f(x)+i\omega(x+vt)\cr
+	&=& i\omega( x+vt+if(x))
+\end{eqnarray}
+Now intuition tells us that the velocity must be tangential to the rack boundary. Thus for a real $\lambda$ we must have:
+\begin{eqnarray}
+i\omega( x+vt+if(x)) &=& \lambda (1+f^\prime(x)i)
+\end{eqnarray}
+or equivalently
+\begin{eqnarray}
+i( x+vt+if(x)) &=& \lambda (1+f^\prime(x)i)
+\end{eqnarray}
+Equating real and imaginary parts	separately yields 2 real equations:
+\begin{eqnarray}
+-f(x) &=& \lambda\cr
+x+vt &=& \lambda f^\prime(x)
+\end{eqnarray}
+After eliminating $\lambda$ we get
+\begin{eqnarray}
+\label{prop3}
+x+vt+f(x)f^\prime(x) &=& 0
+\end{eqnarray}
+\begin{theorem}
+Given a $z_b\in \Gamma$, then for a $t$ and $x$ satisfying
+\begin{eqnarray}
+z_g &=& (x+(f(x)-r)i+vt)e^{-i\omega t} 
+\end{eqnarray}
+this second condition is also satisfied:
+\begin{eqnarray}
+\label{prop_2}
+x+vt+f(x)f^\prime(x) &=& 0
+\end{eqnarray}
+\end{theorem}
+\begin{proof}
+The velocity of that contact point on the gear is (\ref{contact_vel})
+\begin{eqnarray}
+	\dot{\Xi}_r(z_g,t) &=& i\omega( x+vt+if(x))
+\end{eqnarray}
+This means, after $\Delta t$ the point $z_g$ is found at 
+\begin{eqnarray}
+	z = z_r + i\omega( x+vt+if(x))\Delta t
+\end{eqnarray}
+in rack coordinates. The change of the rack-x-coordinate (the real part) is thus
+\begin{eqnarray}
+\Delta x &=& -\omega f(x) \Delta t
+\end{eqnarray}
+while the change of profile elevation for this $\Delta x$ is
+\begin{eqnarray}
+	\Delta y &=& f^\prime(x)\Delta x = -\omega f^\prime(x)f(x)\Delta t
+\end{eqnarray}
+On the other hand, the change of elevation of the moving gear point is (the imaginary part):
+\begin{eqnarray}
+	\Delta y^\prime &=& \omega (x+vt) \Delta t
+\end{eqnarray}
+The difference
+\begin{eqnarray}
+	\Delta y^\prime-\Delta y &=& \omega(x+vt+f^\prime(x)f(x))
+\end{eqnarray}
+only vanishes if the expression \ref{prop_2} is also vanishing. But a nonzero value of the above expression immediately implies a collision of the gear point $z_g$ shortly before or after time $t$.
+\qed
+\end{proof}
+\end{subsubsection}
+\end{subsection}
+
+\begin{subsection}{A curve that contains $\Gamma$}
+We now construct a smooth curve $\gamma(x)$ such that, due to the two above theorems, contains all points of $\Gamma$. First, for any $x$ there is the only one
+\begin{eqnarray}
+t(x) &=& -\frac{f(x)f^\prime(x)+x}{v}
+\end{eqnarray}
+which satisfies \ref{prop3}. Based on this, we have a point $z(x)$ on the rack
+\begin{eqnarray}
+z_r(x) &=& x+(f(x)-r)i
+\end{eqnarray}
+And in world space coordinates:
+\begin{eqnarray}
+z(x) &=& \Phi_r(z_r(x),t(x)) = z_r(x)+vt(x)\cr
+&=&x+(f(x)-r)i-(f(x)f^\prime(x)+x)\cr
+&=&-f(x)f^\prime(x)+(f(x)-r)i
+\end{eqnarray}
+and finally the point on the gear.
+\begin{eqnarray}
+\gamma(x) &=& \Xi_g(z_r(x),t(x))=\Phi^{-1}_g(z(x),t(x))\cr
+	&=& z(x)e^{-i\omega t(x)}\cr
+	&=& (-f(x)f^\prime(x)+(f(x)-r)i)e^{-i\omega t(x)}	
+\end{eqnarray}
+\end{subsection}
+\eeeccc
+\beginchap{Dynamics}
+\eeeccc
+\end{document}

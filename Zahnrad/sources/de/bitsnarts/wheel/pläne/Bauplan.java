@@ -2,29 +2,93 @@ package de.bitsnarts.wheel.pläne;
 import java.awt.geom.Path2D;
 import java.awt.geom.Path2D.Double;
 
+import de.bitsnarts.gear.graphics.Circle;
 import de.bitsnarts.utils.print.PrintShape;
 
 public class Bauplan {
 
-	private double umf_4;
-	private double outerDist;
 	private double bildBreite;
 	private double rahmenBreite;
 	private int numBilder;
-	private static double scale = 1000.0;
-	
-	public Bauplan(double umf_4) {
-		this.umf_4 = umf_4*scale ;
-		outerDist = 0.05*scale ;
-		bildBreite = 0.3*scale ;
-		rahmenBreite = 0.035*scale ;
+	double ceilHeight = 5597 ;
+	double balkenUnterkannte = 5290.0 ;
+	double balkenHöhe = ceilHeight-balkenUnterkannte ;
+	double balkenBreite = balkenHöhe ;
+	double xMin = -balkenBreite ;
+	double balkenDist = 3460 ;
+	double radCenterX = balkenDist/2.0 ;
+	double radCenterY =-ceilHeight/2.0 ;
+	double brettDicke = 006.0 ;
+	double umf = Math.PI*(5000.0+brettDicke/2.0) ;
+	double umf_4 = umf / 4.0 ;
+	double achtelRad = 2.840 ;//kg
+	double radMass = achtelRad*8.0 ;//kg
+	double fuenfBilder = 3.400 ;//3.030 ;//kg
+	double bildMasse = fuenfBilder/5.0 ;//kg
+	int numImages = 50 ;
+	double bilderMasse = bildMasse*numImages ;//kg
+	double dreieckSeitenLänge = 150.0 ; // m
+	double h = dreieckSeitenLänge*Math.sqrt( 3.0/4.0 ) ;
+	double c = h/3.0 ;
+	double shift = c*radMass/bilderMasse ;
+
+	public Bauplan() {
+		//outerDist = 50.0 ;
+		bildBreite = 300.0 ;
+		rahmenBreite = 350.0 ;
 		numBilder = 13 ;
 	}
 
-	private void drawPlan() {
+	private void drawPlanFront() {
 		Path2D.Double path = new Path2D.Double () ;
-		drawBilder ( path ) ;
-		PrintShape.print( path, false, 200.0/umf_4 );
+		drawBottomAndCeil ( path ) ;
+		printWheel ( path ) ;
+		printGerüst ( path ) ;
+		PrintShape.print( path, false, 190.0/6000.0 );
+	}
+
+	private void printGerüst(Double path) {
+		double gerüstLänge = 2450 ;
+		path.moveTo( radCenterX-gerüstLänge/2.0, 0);
+		path.lineTo( radCenterX-gerüstLänge/2.0, -5200 );
+		path.lineTo( radCenterX+gerüstLänge/2.0, -5200 );
+		path.lineTo( radCenterX+gerüstLänge/2.0, 0 );
+		path.moveTo( radCenterX-gerüstLänge/2.0, -4200);
+		path.lineTo( radCenterX+gerüstLänge/2.0, -4200);
+	}
+
+	private void printWheel(Double path) {
+		Circle c ;
+		c = new Circle ( radCenterX, radCenterY, 2500.0, 100 ) ;
+		c.addTo( path );
+		c = new Circle ( radCenterX, radCenterY, 2500.0+25.0, 100 ) ;
+		c.addTo( path );
+		
+		c = new Circle ( radCenterX, radCenterY, 2500.0-dreieckSeitenLänge, 100 ) ;
+		c.addTo( path );
+		c = new Circle ( radCenterX, radCenterY, 2500.0+25.0-dreieckSeitenLänge, 100 ) ;
+		c.addTo( path );
+		
+		c = new Circle ( radCenterX, radCenterY, 2500.0-dreieckSeitenLänge/2, 100 ) ;
+		c.addTo( path );
+		c = new Circle ( radCenterX, radCenterY, 2500.0+25.0-dreieckSeitenLänge/2, 100 ) ;
+		c.addTo( path );
+		
+		
+	}
+
+	private void drawBottomAndCeil(Double path) {
+		path.moveTo( xMin, -ceilHeight );
+		path.lineTo( xMin, -balkenUnterkannte );
+		path.lineTo( 0, -balkenUnterkannte );
+		path.lineTo( 0, -ceilHeight );
+		path.lineTo( balkenDist, -ceilHeight );
+		path.lineTo( balkenDist, -balkenUnterkannte );
+		path.lineTo( balkenDist+balkenBreite, -balkenUnterkannte );
+		path.lineTo( balkenDist+balkenBreite, -ceilHeight );
+		double xMax = balkenDist+balkenBreite ;
+		path.moveTo( xMin, 0 ); 
+		path.lineTo( xMax, 0 ); 
 	}
 
 	private void drawBilder(Double path) {
@@ -36,7 +100,7 @@ public class Bauplan {
 
 	
 	private void printBild(Double path, double pos ) {
-		double dx = 0.015*scale ;
+		double dx = 15.0 ;
 		path.moveTo( dx, pos+rahmenBreite );
 		path.lineTo( 0, pos+rahmenBreite );
 		path.lineTo( 0, pos );
@@ -48,11 +112,8 @@ public class Bauplan {
 	}
 
 	public static void main ( String args [] ) {
-		double brettDicke = 0.006 ;
-		double umf = Math.PI*(5.0+brettDicke/2.0) ;
-		double umf_4 = umf / 4.0 ;
-		Bauplan bp = new Bauplan ( umf_4 ) ;
-		bp.drawPlan () ;
+		Bauplan bp = new Bauplan () ;
+		bp.drawPlanFront () ;
 	}
 
 }

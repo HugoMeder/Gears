@@ -1,0 +1,18 @@
+Formelsammlung zur Zahnradberechnung
+
+ 
+Modul 	m = p / ¶ = d / z
+Teilung 	p = ¶ x m
+Zähnezahl 	z = d / m = (da - 2 x m)/m
+Kopfspiel 	c = 0,1 x m bis 0,3 x m;
+oft c = 0,167 x m
+Zahnhöhe 	h = 2 x m + c
+Zahnkopfhöhe 	ha = m
+Zahnfußhöhe 	hf  = m + c
+Teilkreisdurchmesser 	d = m x z = (z x p)/¶
+Kopfkreisdurchmesser 	da = d + 2 x m = m x (z + 2)
+Fußkreisdurchmesser 	df = d - 2 x (m + c) 
+Achsabstand 	a = (d1 + d2 )/2 
+a= (m x (z1 + z2 )/2
+
+  

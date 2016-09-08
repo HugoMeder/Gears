@@ -1,4 +1,4 @@
-package de.bitsnarts.aufhängung;
+package de.bitsnarts.aufhaengung;
 
 import java.awt.geom.Path2D;
 import java.awt.geom.Path2D.Double;
@@ -6,7 +6,7 @@ import java.awt.geom.Path2D.Double;
 import de.bitsnarts.gear.graphics.Circle;
 import de.bitsnarts.utils.print.PrintShape;
 
-public class Aufhängung {
+public class Aufhaengung {
 
 	class WheelPart {
 		double outerDiameter = 5000.0 ;
@@ -43,7 +43,7 @@ public class Aufhängung {
 	private WheelPart wp;
 	private MotorPart mp;
 	
-	Aufhängung ( double motorRotationTime ) {
+	Aufhaengung ( double motorRotationTime ) {
 		double phiDeg = 60.0 ;
 		double phi = phiDeg *Math.PI/180.0 ;
 		wp = new WheelPart ( phi ) ;
@@ -141,7 +141,7 @@ public class Aufhängung {
 
 	public static void main ( String[] args ) {
 		double motorRotationTime = 3.0 ;
-		Aufhängung a = new Aufhängung ( motorRotationTime ) ;
+		Aufhaengung a = new Aufhaengung ( motorRotationTime ) ;
 		Double path = a.getDrawing () ;
 		PrintShape.print( path, false, true ) ;
 		System.out.println( "done" );

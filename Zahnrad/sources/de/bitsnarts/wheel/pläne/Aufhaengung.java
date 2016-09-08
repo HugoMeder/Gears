@@ -43,8 +43,7 @@ public class Aufhaengung {
 	private WheelPart wp;
 	private MotorPart mp;
 	
-	Aufhaengung ( double motorRotationTime ) {
-		double phiDeg = 60.0 ;
+	Aufhaengung ( double motorRotationTime, double phiDeg ) {
 		double phi = phiDeg *Math.PI/180.0 ;
 		wp = new WheelPart ( phi ) ;
 		
@@ -140,8 +139,8 @@ public class Aufhaengung {
 	}
 
 	public static void main ( String[] args ) {
-		double motorRotationTime = 3.0 ;
-		Aufhaengung a = new Aufhaengung ( motorRotationTime ) ;
+		double motorRotationTime = (1.65 + 3.3 )/2.0 ;
+		Aufhaengung a = new Aufhaengung ( motorRotationTime, 45.0 ) ;
 		Double path = a.getDrawing () ;
 		PrintShape.print( path, false, true ) ;
 		System.out.println( "done" );

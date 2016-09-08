@@ -1,4 +1,4 @@
-package de.bitsnarts.aufhaengung;
+package de.bitsnarts.wheel.pläne;
 
 import java.awt.geom.Path2D;
 import java.awt.geom.Path2D.Double;
